@@ -10,16 +10,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: List Directory
+        run: ls -la /app
+
+      - name: Check Python Version
+        run: docker-compose -f ./docker-compose.yaml run --rm app python --version
+
+      - name: Check Installed Packages
+        run: docker-compose -f ./docker-compose.yaml run --rm app pip freeze
+
+      - name: Install Docker and Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io docker-compose
+
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Install Docker Compose
+
+      - name: Build and Run Tests
         run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
-      - name: Test
-        run: docker-compose run --rm app sh -c "python manage.py test"
+          docker-compose -f ./docker-compose.yaml build  # Build the image
+          docker-compose -f ./docker-compose.yaml run --rm app sh -c "python manage.py test"
+
       - name: Lint
         run: docker-compose run --rm app sh -c "flake8"
