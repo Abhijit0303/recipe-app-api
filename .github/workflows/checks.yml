@@ -24,17 +24,17 @@ jobs:
 
       - name: Build and Run Tests
         run: |
-          docker-compose -f ./docker-compose.yaml build  # Build the image
-          docker-compose -f ./docker-compose.yaml run --rm app sh -c "python manage.py test"
+          docker-compose build  # Build the image
+          docker-compose run --rm app sh -c "python manage.py test"
 
       - name: List Directory
         run: ls -la /app
 
       - name: Check Python Version
-        run: docker-compose -f ./docker-compose.yaml run --rm app python --version
+        run: docker-compose run --rm app python --version
 
       - name: Check Installed Packages
-        run: docker-compose -f ./docker-compose.yaml run --rm app pip freeze
+        run: docker-compose run --rm app pip freeze
 
       - name: Lint
         run: docker-compose run --rm app sh -c "flake8"
