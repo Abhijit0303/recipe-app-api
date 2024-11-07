@@ -22,9 +22,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: List Directory
-        run: ls -la /app
-
       - name: Build
         run: |
           docker-compose build  # Build the image
