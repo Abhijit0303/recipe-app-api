@@ -24,20 +24,20 @@ jobs:
 
       - name: Build
         run: |
-          docker-compose build  # Build the image
+          docker compose build  # Build the image
 
       - name: List Directory
         run: ls -la /app
 
       - name: Run Tests
         run: |
-          docker-compose run --rm app sh -c "python manage.py test"
+          docker compose run --rm app sh -c "python manage.py test"
 
       - name: Check Python Version
-        run: docker-compose run --rm app python --version
+        run: docker compose run --rm app python --version
 
       - name: Check Installed Packages
-        run: docker-compose run --rm app pip freeze
+        run: docker compose run --rm app pip freeze
 
       - name: Lint
-        run: docker-compose run --rm app sh -c "flake8"
+        run: docker compose run --rm app sh -c "flake8"
