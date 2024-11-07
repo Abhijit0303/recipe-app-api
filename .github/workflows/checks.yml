@@ -22,13 +22,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: List Directory
+        run: ls -la /app
+
       - name: Build and Run Tests
         run: |
           docker-compose build  # Build the image
           docker-compose run --rm app sh -c "python manage.py test"
-
-      - name: List Directory
-        run: ls -la /app
 
       - name: Check Python Version
         run: docker-compose run --rm app python --version
