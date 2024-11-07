@@ -25,9 +25,15 @@ jobs:
       - name: List Directory
         run: ls -la /app
 
-      - name: Build and Run Tests
+      - name: Build
         run: |
           docker-compose build  # Build the image
+
+      - name: List Directory
+        run: ls -la /app
+
+      - name: Run Tests
+        run: |
           docker-compose run --rm app sh -c "python manage.py test"
 
       - name: Check Python Version
