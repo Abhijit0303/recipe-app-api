@@ -19,7 +19,7 @@ jobs:
 
       - name: Build
         run: |
-          docker compose up --build
+          docker compose build
 
       - name: Run Tests
         run: |
