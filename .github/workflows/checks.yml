@@ -25,11 +25,5 @@ jobs:
         run: |
           docker compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
 
-      - name: Check Python Version
-        run: docker compose run --rm app python --version
-
-      - name: Check Installed Packages
-        run: docker compose run --rm app pip freeze
-
       - name: Lint
         run: docker compose run --rm app sh -c "flake8"
